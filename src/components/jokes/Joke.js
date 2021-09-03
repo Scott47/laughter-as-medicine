@@ -1,4 +1,10 @@
 import React, { useState, useEffect } from "react";
+import { getJoke,
+    getFunnyJokes,
+    getNotFunnyJokes,
+    sendFunnyToMe,
+    sendNotFunnyToMe } from "../data/ApiManager";
+import "./Joke.css"
 
 export const Joke = () => {
     const [newJoke, setNewJoke] = useState({})
@@ -7,55 +13,10 @@ export const Joke = () => {
     const [funnyCount, setFunnyCount] = useState(0)
     const [notFunnyCount, setNotFunnyCount] = useState(0)
 
-
-    const getJoke = () => {
-        return fetch("https://official-joke-api.appspot.com/random_joke")
-            .then(jk => jk.json())
-            .then(setNewJoke)
-    }
-
-    const getFunnyJokes = () => {
-        return fetch("http://localhost:8080/funnytome")
-            .then(jk => jk.json())
-            .then(setFunnyJokes)
-    }
-    const getNotFunnyJokes = () => {
-        return fetch("http://localhost:8080/notfunnytome")
-            .then(jk => jk.json())
-            .then(setNotFunnyJokes)
-    }
-
-    const sendToFunnyToMe = (jokeObj) => {
-        const fetchOptions = {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(jokeObj)
-        }
-        return fetch(`http://localhost:8080/funnytome`, fetchOptions)
-            .then(jk => jk.json())
-            .then(getFunnyJokes)
-    }
-
-    const sendToNotFunnyToMe = (jokeObj) => {
-        const fetchOptions = {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(jokeObj)
-        }
-        return fetch(`http://localhost:8080/notfunnytome`, fetchOptions)
-            .then(jk => jk.json())
-            .then(getNotFunnyJokes)
-
-    }
-
     useEffect(() => {
-        getJoke()
-        getFunnyJokes()
-        getNotFunnyJokes()
+        getJoke().then((j) => setNewJoke(j))
+        getFunnyJokes().then((nfj => setFunnyJokes(nfj)))
+        getNotFunnyJokes().then((fj) => setNotFunnyJokes(fj))
     }, [])
 
 
@@ -80,26 +41,29 @@ export const Joke = () => {
                 <p>{newJoke.setup}</p>
                 <p>{newJoke.punchline}</p>
             </div>
-            <button onClick={() => {
-                const thisJoke = {
-                    punchline: newJoke.punchline,
-                    setup: newJoke.setup,
-                    type: newJoke.type
-                }
-                sendToFunnyToMe(thisJoke)
-            }}>Funny To Me
-            </button>
-            <div>Count: {funnyCount}</div>
-            <button onClick={() => {
-                const thisJoke = {
-                    punchline: newJoke.punchline,
-                    setup: newJoke.setup,
-                    type: newJoke.type
-                }
-                sendToNotFunnyToMe(thisJoke)
-            }}>Not Funny To Me</button>
-            <div>Count: {notFunnyCount}</div>
-
+            <div className="button-count">
+                <button onClick={() => {
+                    const thisJoke = {
+                        punchline: newJoke.punchline,
+                        setup: newJoke.setup,
+                        type: newJoke.type
+                    }
+                    sendFunnyToMe(thisJoke).then(() => getFunnyJokes().then(setFunnyJokes))
+                }}>Funny To Me
+                </button>
+                <div className="count">{funnyCount} jokes</div>
+            </div>
+            <div className="button-count">
+                <button onClick={() => {
+                    const thisJoke = {
+                        punchline: newJoke.punchline,
+                        setup: newJoke.setup,
+                        type: newJoke.type
+                    }
+                    sendNotFunnyToMe(thisJoke).then(() => getNotFunnyJokes().then(setNotFunnyJokes))
+                }}>Not Funny To Me</button>
+                <div className="count">{notFunnyCount} jokes</div>
+            </div>
         </>
     )
 }

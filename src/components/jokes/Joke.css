@@ -1,0 +1,10 @@
+.button-count {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: left;
+
+}
+
+.count {
+    flex-basis: 20%;
+}
