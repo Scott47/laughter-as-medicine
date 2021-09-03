@@ -8,3 +8,11 @@
 .count {
     flex-basis: 20%;
 }
+
+.setup {
+    font-weight: 800;
+}
+
+.punchline {
+    font-style: italic;
+}

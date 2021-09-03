@@ -7,12 +7,12 @@ export const getJoke = () => {
 
 export const getFunnyJokes = () => {
     return fetch("http://localhost:8080/funnytome")
-        .then(jk => jk.json())
+        .then(fjk => fjk.json())
 }
 
 export const getNotFunnyJokes = () => {
     return fetch("http://localhost:8080/notfunnytome")
-        .then(jk => jk.json())
+        .then(nfjk => nfjk.json())
 }
 
 export const sendFunnyToMe = (jokeObj) => {
@@ -29,7 +29,7 @@ export const sendFunnyToMe = (jokeObj) => {
 }
 
 export const sendNotFunnyToMe = (jokeObj) => {
-    
+
     const fetchOptions = {
         method: "POST",
         headers: {

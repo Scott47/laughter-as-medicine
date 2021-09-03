@@ -1,23 +1,20 @@
 import { useState, useEffect } from "react"
+import { getFunnyJokes } from '../data/ApiManager'
 
 
 export const FunnyToMe = () => {
     const [funnyJokes, setFunnyJokes] = useState([])
 
-    const getJokes = () => {
-        return fetch("http://localhost:8080/funnytome")
-            .then(jk => jk.json())
-            .then(setFunnyJokes)
-    }
+    
 
-    useEffect(() => getJokes(), [])
+    useEffect(() => getFunnyJokes().then(setFunnyJokes), [])
 
     return (
         <>
         <h2>Funny Jokes</h2>
 
             {
-                funnyJokes.map(joke => <div key={joke.id}><p >{joke.setup}</p><p>{joke.punchline}</p></div>)
+                funnyJokes.map(joke => <div key={joke.id}><p className="setup">{joke.setup}</p><p className="punchline">{joke.punchline}</p></div>)
             }
         </>
     )
