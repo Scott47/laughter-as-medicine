@@ -15,12 +15,12 @@ export const Joke = () => {
     }
 
     const getFunnyJokes = () => {
-        return fetch("http://localhost:8088/funnytome")
+        return fetch("http://localhost:8080/funnytome")
             .then(jk => jk.json())
             .then(setFunnyJokes)
     }
     const getNotFunnyJokes = () => {
-        return fetch("http://localhost:8088/notfunnytome")
+        return fetch("http://localhost:8080/notfunnytome")
             .then(jk => jk.json())
             .then(setNotFunnyJokes)
     }
@@ -33,7 +33,7 @@ export const Joke = () => {
             },
             body: JSON.stringify(jokeObj)
         }
-        return fetch(`http://localhost:8088/funnytome`, fetchOptions)
+        return fetch(`http://localhost:8080/funnytome`, fetchOptions)
             .then(jk => jk.json())
             .then(getFunnyJokes)
     }
@@ -46,7 +46,7 @@ export const Joke = () => {
             },
             body: JSON.stringify(jokeObj)
         }
-        return fetch(`http://localhost:8088/notfunnytome`, fetchOptions)
+        return fetch(`http://localhost:8080/notfunnytome`, fetchOptions)
             .then(jk => jk.json())
             .then(getNotFunnyJokes)
 
@@ -73,6 +73,9 @@ export const Joke = () => {
 
     return (
         <>
+            <header className="LaughApp-header">
+                <h1>Let's Laugh😆...or not 😩</h1>
+            </header>
             <div>
                 <p>{newJoke.setup}</p>
                 <p>{newJoke.punchline}</p>

@@ -5,7 +5,7 @@ export const FunnyToMe = () => {
     const [funnyJokes, setFunnyJokes] = useState([])
 
     const getJokes = () => {
-        return fetch("http://localhost:8088/funnytome")
+        return fetch("http://localhost:8080/funnytome")
             .then(jk => jk.json())
             .then(setFunnyJokes)
     }
@@ -14,8 +14,10 @@ export const FunnyToMe = () => {
 
     return (
         <>
+        <h2>Funny Jokes</h2>
+
             {
-                funnyJokes.map(joke => <p key={joke.id}>{joke.setup}<p>{joke.punchline}</p></p>)
+                funnyJokes.map(joke => <div key={joke.id}><p >{joke.setup}</p><p>{joke.punchline}</p></div>)
             }
         </>
     )
