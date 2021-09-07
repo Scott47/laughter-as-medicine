@@ -1,6 +1,6 @@
 # Laughter As Medicine
 
-An app for rendering random jokes and selecting jokes that are funny to you or not funny to you. This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+An app for rendering random jokes from [https://official-joke-api.appspot.com/random_joke](https://official-joke-api.appspot.com/random_joke). Users can save jokes they find funny or not funny. This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## How to run this application:
 

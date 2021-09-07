@@ -1,18 +1,18 @@
 
 
 export const getJoke = () => {
-    return fetch("https://official-joke-api.appspot.com/random_joke")
+    return fetch("https://sv443.net/jokeapi/v2/joke/pun")
         .then(jk => jk.json())
 }
 
 export const getFunnyJokes = () => {
     return fetch("http://localhost:8080/funnytome")
-        .then(fjk => fjk.json())
+        .then(jk => jk.json())
 }
 
 export const getNotFunnyJokes = () => {
     return fetch("http://localhost:8080/notfunnytome")
-        .then(nfjk => nfjk.json())
+        .then(jk => jk.json())
 }
 
 export const sendFunnyToMe = (jokeObj) => {

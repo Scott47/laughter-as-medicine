@@ -39,12 +39,12 @@ export const Joke = () => {
             </header>
             <div>
                 <p>{newJoke.setup}</p>
-                <p>{newJoke.punchline}</p>
+                <p>{newJoke.delivery}</p>
             </div>
             <div className="button-count">
                 <button onClick={() => {
                     const thisJoke = {
-                        punchline: newJoke.punchline,
+                        punchline: newJoke.delivery,
                         setup: newJoke.setup,
                         type: newJoke.type
                     }
@@ -56,7 +56,7 @@ export const Joke = () => {
             <div className="button-count">
                 <button onClick={() => {
                     const thisJoke = {
-                        punchline: newJoke.punchline,
+                        punchline: newJoke.delivery,
                         setup: newJoke.setup,
                         type: newJoke.type
                     }
